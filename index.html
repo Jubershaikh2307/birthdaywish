@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Sana ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color-1: #2a0813;
+            --bg-color-2: #0f0307;
+            --rose-gold: #b76e79;
+            --cake-base: #f9d8d6;
+            --cake-frosting: #ffe4e1;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--bg-color-1) 0%, var(--bg-color-2) 100%);
+            min-height: 100vh;
+            color: #fff;
+            font-family: 'Cormorant Garamond', serif;
+            overflow-x: hidden;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .font-cursive {
+            font-family: 'Great Vibes', cursive;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(40, 10, 20, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 182, 193, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 20px rgba(183, 110, 121, 0.2);
+        }
+
+        /* Background Animations */
+        .floating-item {
+            position: absolute;
+            opacity: 0;
+            z-index: 0;
+            animation: float-up linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(110vh) scale(0.5) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(45deg); opacity: 0; }
+        }
+
+        /* Cake CSS */
+        .cake-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .cake-container:hover {
+            transform: scale(1.02);
+        }
+
+        .plate {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 260px;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 50%;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 -4px 10px rgba(0,0,0,0.2);
+        }
+
+        .tier {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cake-base);
+            border-radius: 10px;
+            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
+        }
+
+        .tier-bottom {
+            bottom: 30px;
+            width: 200px;
+            height: 70px;
+        }
+
+        .tier-top {
+            bottom: 100px;
+            width: 140px;
+            height: 60px;
+        }
+
+        .frosting {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 25px;
+            background: var(--cake-frosting);
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .drip {
+            position: absolute;
+            top: 20px;
+            width: 15px;
+            height: 30px;
+            background: var(--cake-frosting);
+            border-radius: 0 0 15px 15px;
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 160px;
+            width: 12px;
+            height: 45px;
+            background: repeating-linear-gradient(
+                45deg,
+                #fff,
+                #fff 5px,
+                #ff6b81 5px,
+                #ff6b81 10px
+            );
+            border-radius: 3px;
+            box-shadow: inset 0 -5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .candle:nth-child(1) { left: 40%; transform: translateX(-50%); }
+        .candle:nth-child(2) { left: 50%; transform: translateX(-50%); bottom: 165px; height: 50px;}
+        .candle:nth-child(3) { left: 60%; transform: translateX(-50%); }
+
+        .flame {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 22px;
+            background: #ff9900;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.8), 0 0 40px rgba(255, 153, 0, 0.6);
+            animation: flicker 0.1s infinite alternate;
+            transform-origin: bottom center;
+        }
+        
+        .flame-inner {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 12px;
+            background: #ffcc00;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-1deg); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1.05) rotate(2deg); opacity: 1; }
+        }
+
+        .extinguished {
+            animation: smoke 1s forwards !important;
+        }
+
+        @keyframes smoke {
+            0% { 
+                background: rgba(100, 100, 100, 0.8); 
+                box-shadow: none;
+                transform: translateX(-50%) scale(1) translateY(0);
+                opacity: 1;
+            }
+            100% { 
+                background: rgba(150, 150, 150, 0); 
+                box-shadow: none;
+                transform: translateX(-50%) scale(2) translateY(-40px);
+                opacity: 0;
+            }
+        }
+
+        /* Transition Classes */
+        .fade-transition {
+            transition: opacity 1.5s ease-in-out;
+        }
+        
+        .opacity-0 { opacity: 0; pointer-events: none; }
+        .opacity-100 { opacity: 1; pointer-events: auto; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Background Particles Container -->
+    <div id="particles-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- Phase 1: Cake & Candles -->
+    <div id="phase1" class="absolute inset-0 flex flex-col items-center justify-center z-20 fade-transition opacity-100 px-4">
+        
+        <div class="text-center mb-8">
+            <h1 class="font-cursive text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-[#b76e79] to-pink-300 drop-shadow-lg mb-4">
+                Happy Birthday Sana!
+            </h1>
+            <p class="text-pink-100/80 text-xl md:text-2xl animate-pulse tracking-wide font-light">
+                Make a wish and tap the cake to blow out the candles...
+            </p>
+        </div>
+
+        <div class="cake-container" onclick="blowOutCandles()">
+            <!-- Shadows & Plate -->
+            <div class="plate"></div>
+            
+            <!-- Bottom Tier -->
+            <div class="tier tier-bottom">
+                <div class="frosting">
+                    <div class="drip" style="left: 10px;"></div>
+                    <div class="drip" style="left: 40px; height: 20px;"></div>
+                    <div class="drip" style="left: 80px; height: 35px;"></div>
+                    <div class="drip" style="left: 130px; height: 15px;"></div>
+                    <div class="drip" style="left: 170px; height: 25px;"></div>
+                </div>
+            </div>
+            
+            <!-- Top Tier -->
+            <div class="tier tier-top">
+                <div class="frosting">
+                    <div class="drip" style="left: 15px; height: 25px;"></div>
+                    <div class="drip" style="left: 50px; height: 15px;"></div>
+                    <div class="drip" style="left: 90px; height: 30px;"></div>
+                    <div class="drip" style="left: 115px; height: 20px;"></div>
+                </div>
+            </div>
+            
+            <!-- Candles -->
+            <div class="candle">
+                <div class="flame"><div class="flame-inner"></div></div>
+            </div>
+            <div class="candle">
+                <div class="flame"><div class="flame-inner"></div></div>
+            </div>
+            <div class="candle">
+                <div class="flame"><div class="flame-inner"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Phase 2: The Letter (Hidden Initially) -->
+    <div id="phase2" class="absolute inset-0 flex items-center justify-center p-4 sm:p-6 z-10 fade-transition opacity-0" style="display: none;">
+        <div class="glass-card max-w-2xl w-full rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+            
+            <!-- Decorative borders -->
+            <div class="absolute top-0 left-0 w-24 h-24 border-t border-l border-[#b76e79]/40 rounded-tl-3xl opacity-60 m-4"></div>
+            <div class="absolute bottom-0 right-0 w-24 h-24 border-b border-r border-[#b76e79]/40 rounded-br-3xl opacity-60 m-4"></div>
+
+            <div class="relative z-10">
+                <h2 class="font-cursive text-5xl sm:text-7xl mb-8 text-[#f9d8d6] drop-shadow-md">
+                    My Dearest Sana,
+                </h2>
+                
+                <div class="w-32 h-[1px] bg-gradient-to-r from-transparent via-[#b76e79] to-transparent mx-auto mb-8"></div>
+                
+                <div class="text-xl sm:text-2xl leading-relaxed text-pink-50 space-y-6 font-light drop-shadow-sm text-left sm:text-center px-2">
+                    <p>
+                        I love you soo much i know there are lot of things going on but we wll always be strong and allah is with us
+                    </p>
+                    <p>
+                        and we will always stay together in sha allah allah will help us and hum namazi bane ek sath ek dusre ke sath rahay
+                    </p>
+                    <p>
+                        or humare becch kabh duri naa aae naa galat femi or naa esa kuch kaam kare jis se hurt ho ek dusre ko
+                    </p>
+                    <p class="font-cursive text-4xl sm:text-5xl text-[#f9d8d6] mt-8 pt-4">
+                        allah humare dua quabool karo<br><span class="mt-2 block">ameen summa ameen ❤️</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Background Particle Animation ---
+        function createParticle() {
+            const container = document.getElementById('particles-container');
+            const particle = document.createElement('div');
+            particle.classList.add('floating-item');
+            
+            // Random properties
+            const size = Math.random() * 15 + 10;
+            const left = Math.random() * 100;
+            const duration = Math.random() * 8 + 6; // 6s to 14s
+            
+            // Mix of hearts and sparkles
+            const symbols = ['❤️', '✨', '💖', '⭐'];
+            particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+            
+            particle.style.fontSize = `${size}px`;
+            particle.style.left = `${left}vw`;
+            particle.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(particle);
+            
+            // Cleanup
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        function startParticles() {
+            // Initial scatter
+            for(let i=0; i<20; i++) {
+                setTimeout(createParticle, i * 200);
+            }
+            // Continuous loop
+            setInterval(createParticle, 500);
+        }
+
+        // --- Interaction Logic ---
+        let hasBlownCandles = false;
+
+        function blowOutCandles() {
+            if (hasBlownCandles) return; // Prevent multiple clicks
+            hasBlownCandles = true;
+
+            // 1. Extinguish Flames
+            const flames = document.querySelectorAll('.flame');
+            const flameInners = document.querySelectorAll('.flame-inner');
+            
+            // Hide inner bright yellow parts instantly
+            flameInners.forEach(inner => inner.style.display = 'none');
+            
+            // Apply smoke/fade animation to outer flames
+            flames.forEach(flame => {
+                flame.classList.add('extinguished');
+            });
+
+            // 2. Transition to Phase 2
+            // Wait 1.5 seconds to watch the smoke rise, then crossfade
+            setTimeout(() => {
+                const phase1 = document.getElementById('phase1');
+                const phase2 = document.getElementById('phase2');
+
+                // Fade out cake
+                phase1.classList.remove('opacity-100');
+                phase1.classList.add('opacity-0');
+
+                // Wait for fade out to complete, then switch displays and fade in
+                setTimeout(() => {
+                    phase1.style.display = 'none';
+                    phase2.style.display = 'flex';
+                    
+                    // Force a browser reflow to ensure the transition works
+                    void phase2.offsetWidth; 
+                    
+                    // Fade in letter
+                    phase2.classList.remove('opacity-0');
+                    phase2.classList.add('opacity-100');
+                }, 1500); // 1.5s matches CSS transition duration
+
+            }, 1500); // Wait 1.5s after blowing candles before starting fade
+        }
+
+        // Initialize
+        window.onload = function() {
+            startParticles();
+        };
+    </script>
+</body>
+</html>
